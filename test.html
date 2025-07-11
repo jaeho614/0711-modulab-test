@@ -194,10 +194,13 @@
       secondEl.value = second;
       if (second < 0) {
         secondEl.value = 59
-        minuteEl.value -= 1;
+        minute -= 1;
         if (minute < 0) {
           minuteEl.value = 59;
-          hourEl.value -= 1;
+          hour -= 1;
+          if (hour < 0) {
+            hourEl.value = 23;
+          }
         }
       }
     }
@@ -212,6 +215,12 @@
     });
 
     function resetTime() {
+      const hourEl = document.querySelector("#hour");
+      const minuteEl = document.querySelector("#minute");
+      const secondEl = document.querySelector("#second");
+      hourEl.value = 0;
+      minuteEl.value = 0;
+      secondEl.value = 0;
     }
   </script>
 </body>

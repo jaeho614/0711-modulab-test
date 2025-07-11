@@ -174,27 +174,31 @@
     const resetBtn = document.querySelector("#resetBtn");
 
     startBtn.addEventListener("click", () => {
-      const hourEl = document.querySelector("#hour");
-      const minuteEl = document.querySelector("#minute");
-
-      const hour = hourEl.value;
-      const minute = minuteEl.value;
-
-
       startBtn.classList.add("hidden");
       pauseBtn.classList.remove("hidden");
       setInterval(() => (
-        calcSec()
+        calcTime()
       ), 1000);
     });
 
-    function calcSec() {
+    function calcTime() {
+      const hourEl = document.querySelector("#hour");
+      const minuteEl = document.querySelector("#minute");
       const secondEl = document.querySelector("#second");
+
+      let hour = hourEl.value;
+      let minute = minuteEl.value;
       let second = secondEl.value;
+
       second -= 1;
       secondEl.value = second;
-      if (second === 0) {
-        secondEl.value = 60
+      if (second < 0) {
+        secondEl.value = 59
+        minuteEl.value -= 1;
+        if (minute < 0) {
+          minuteEl.value = 59;
+          hourEl.value -= 1;
+        }
       }
     }
 
@@ -204,11 +208,10 @@
     });
 
     resetBtn.addEventListener("click", () => {
-      console.log("리셋");
+      resetTime();
     });
 
-    function stopSecond() {
-
+    function resetTime() {
     }
   </script>
 </body>
